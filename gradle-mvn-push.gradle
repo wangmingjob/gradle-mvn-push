@@ -92,16 +92,16 @@ afterEvaluate { project ->
         sign configurations.archives
     }
 
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
+    //task androidJavadocs(type: Javadoc) {
+      //  source = android.sourceSets.main.java.srcDirs
         //classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-        androidJavadocs.classpath += project.android.libraryVariants.toList().first().javaCompile.classpath
-    }
+        //androidJavadocs.classpath += project.android.libraryVariants.toList().first().javaCompile.classpath
+    //}
 
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
-        from androidJavadocs.destinationDir
-    }
+    //task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+      //  classifier = 'javadoc'
+    //    from androidJavadocs.destinationDir
+    //}
 
     task androidSourcesJar(type: Jar) {
         classifier = 'sources'
