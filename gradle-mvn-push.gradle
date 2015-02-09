@@ -30,21 +30,6 @@ if (isReleaseBuild()) {
     sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
-def githubRepositoryUrl
-if (isReleaseBuild()) {
-    githubRepositoryUrl = "file:///D:/develop/mvn"
-} else {
-    githubRepositoryUrl = "file:///D:/develop/mvn"
-}
-
-def local
-if (project.gradle.startParameter.taskNames.contains("uploadLocal")) {
-    local = true
-} else {
-    local = false
-}
-
-
 if (ext.properties.containsKey('signing.keyId') &&
         !ext.properties.containsKey('signing.password')) {
     ext.set('signing.password', 'pass')
@@ -66,12 +51,8 @@ afterEvaluate { project ->
 					configurePOM(pom)
 				}
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-                if (local!=true) {
-                    repository(url: sonatypeRepositoryUrl) {
-                        authentication(userName: nexusUsername, password: nexusPassword)
-                    }
-                } else {
-                    repository(url: githubRepositoryUrl)
+                repository(url: sonatypeRepositoryUrl) {
+                    authentication(userName: nexusUsername, password: nexusPassword)
                 }
             }
         }
