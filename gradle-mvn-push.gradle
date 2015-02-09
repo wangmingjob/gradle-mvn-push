@@ -47,12 +47,12 @@ afterEvaluate { project ->
     uploadArchives {
         repositories {
             mavenDeployer {
-				if (!isTravis) {
-					configurePOM(pom)
-				}
+		if (!isTravis) {
+	           configurePOM(pom)
+		}
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
                 repository(url: sonatypeRepositoryUrl) {
-                    authentication(userName: nexusUsername, password: nexusPassword)
+                   authentication(userName: nexusUsername, password: nexusPassword)
                 }
             }
         }
